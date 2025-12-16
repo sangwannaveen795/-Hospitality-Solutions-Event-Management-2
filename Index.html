@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitality Solutions | Crafting Experiences</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Palette based on PDF: Gold and Navy Blue */
+            --primary-blue: #0a192f; 
+            --secondary-blue: #112240;
+            --accent-gold: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f3e5ab 50%, #d4af37 100%);
+            --white: #ffffff;
+            --text-gray: #333333;
+            --light-gray: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-gray);
+            overflow-x: hidden;
+            background-color: var(--light-gray);
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Cinzel', serif; /* More royal font for headlines */
+            color: var(--primary-blue);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: rgba(10, 25, 47, 0.95);
+            color: var(--accent-gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--accent-gold);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li { margin-left: 2rem; }
+        .nav-links a:hover { color: var(--white); text-shadow: 0 0 5px var(--accent-gold); }
+
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: var(--primary-blue);
+            padding: 0.8rem 2rem;
+            border-radius: 30px; /* Pill shape */
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* --- Creative Hero Section --- */
+        header {
+            height: 100vh;
+            /* Image: Luxury Indian Wedding setup */
+            background: url('https://images.unsplash.com/photo-1519225421980-715cb0202128?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Dark Overlay */
+        header::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; right:0; bottom:0;
+            background: linear-gradient(to bottom, rgba(10, 25, 47, 0.3), rgba(10, 25, 47, 0.8));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: var(--white);
+            max-width: 800px;
+            padding: 3rem;
+            /* Glassmorphism Effect */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* --- Services with Image Backgrounds --- */
+        #services {
+            padding: 6rem 10%;
+            background-color: var(--white);
+            text-align: center;
+        }
+        
+        .section-header {
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.4s;
+            cursor: pointer;
+            group: hover;
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .service-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(10,25,47,0.95), rgba(10,25,47,0.2));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .service-overlay h3 {
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .service-overlay p {
+            color: var(--white);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* --- Gallery "Glimpses" Section --- */
+        #gallery {
+            padding: 6rem 5%;
+            background-color: var(--secondary-blue);
+        }
+
+        #gallery h2 {
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-auto-rows: 250px;
+            gap: 15px;
+        }
+
+        /* Specific creative sizing for masonry feel */
+        .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .gallery-item:nth-child(4) { grid-column: span 2; }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.15);
+        }
+
+        /* --- Why Choose Us (Creative Layout) --- */
+        #features {
+            padding: 6rem 10%;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(to right, #ffffff, #f9f9f9);
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .feature-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .feature-text {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .feature-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .feature-img {
+            flex: 1;
+            position: relative;
+        }
+
+        .feature-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 15px 15px 0 var(--accent-gold); /* Offset border effect */
+        }
+
+        /* --- Contact & Upload Section --- */
+        #contact {
+            padding: 5rem 10%;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Background Circle */
+        #contact::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            top: -50px;
+            right: -50px;
+            opacity: 0.2;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            gap: 4rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-details { flex: 1; }
+        .contact-form-box { 
+            flex: 1; 
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--white);
+            border-radius: 5px;
+        }
+        
+        input::placeholder, textarea::placeholder { color: #aaa; }
+
+        input[type="file"] {
+            padding: 10px;
+            background: none;
+            border: 1px dashed var(--accent-gold);
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #050d1a;
+            color: #888;
+            text-align: center;
+            padding: 2rem;
+            border-top: 3px solid var(--accent-gold);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            header h1 { font-size: 2.2rem; }
+            .feature-row { flex-direction: column !important; }
+            .gallery-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+            .gallery-item:nth-child(4) { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><i class="fas fa-crown"></i> Hospitality Solutions</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Glimpses</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="btn-gold" onclick="document.getElementById('contact').scrollIntoView()">Plan My Event</button>
+    </nav>
+
+    <header id="home">
+        <div class="hero-content">
+            <h1>Crafting Experiences,<br>Managing Moments</h1> <p>Your Trusted Partner for Wedding and Corporate Management. We ensure your special day is seamless, stylish, and stress-free.</p> <div style="margin-top: 20px;">
+                <button class="btn-gold" onclick="document.getElementById('services').scrollIntoView()">Explore Services</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="features">
+        <div class="section-header" style="text-align: center;">
+            <h2>Why Choose Ols</h2> <p style="max-width: 600px; margin: 0 auto;">We weave creativity with precision.</p> </div>
+
+        <div class="feature-row">
+            <div class="feature-text">
+                <h3><i class="fas fa-clipboard-check" style="color:var(--accent-gold);"></i> Attention to Detail</h3> <p>Our team thrives on the finer details, ensuring every aspect of the event runs smoothly. From guest arrivals to managing logistics, nothing is overlooked.</p> </div>
+            <div class="feature-img">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Detailing">
+            </div>
+        </div>
+
+        <div class="feature-row">
+            <div class="feature-text">
+                <h3><i class="fas fa-user-friends" style="color:var(--accent-gold);"></i> Tailored Services</h3> <p>We understand that every wedding is unique. We provide personalized 'Shadows' for the bride and groom, offering bespoke assistance tailored to your needs.</p> </div>
+            <div class="feature-img">
+                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bride and Groom Assistance">
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="section-header">
+            <h2>Our Services</h2> <p>Comprehensive solutions for a hassle-free experience.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1561053720-76cd737ce36f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Reception">
+                <div class="service-overlay">
+                    <i class="fas fa-concierge-bell fa-2x" style="color: var(--accent-gold); margin-bottom: 10px;"></i>
+                    <h3>Desk Management</h3>
+                    <p>Greeting guests with warmth and hospitality at the reception.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1511285560982-1356c11d4606?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Shadows">
+                <div class="service-overlay">
+                    <i class="fas fa-user-shield fa-2x" style="color: var(--accent-gold); margin-bottom: 10px;"></i>
+                    <h3>Male & Female Shadow</h3>
+                    <p>Personalized assistants supporting the couple and family.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Logistics">
+                <div class="service-overlay">
+                    <i class="fas fa-route fa-2x" style="color: var(--accent-gold); margin-bottom: 10px;"></i>
+                    <h3>Logistic Head</h3>
+                    <p>Overseeing the smooth flow of operations behind the scenes.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1553531384-cc64ac80f931?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luggage">
+                <div class="service-overlay">
+                    <i class="fas fa-suitcase-rolling fa-2x" style="color: var(--accent-gold); margin-bottom: 10px;"></i>
+                    <h3>Luggage Head</h3>
+                    <p>Handling all luggage management for a hassle-free experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2><span style="border-bottom: 2px solid var(--accent-gold);">Glimpses</span> of Our Work</h2> <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Wedding Decor">
+            </div>
+            <div class="gallery-item">
+                <img src="https://www.shreevinayakevents.com/images/social_event.jpg" alt="Indian Wedding">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Staff Service">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Details">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Catering">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 style="text-align: center; margin-bottom: 3rem;">Get In Touch</h2>
+        <div class="contact-wrapper">
+            
+            <div class="contact-details">
+                <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">Contact Ols</h3> <p><i class="fas fa-map-marker-alt"></i> 194/73, sector 19, Pratap Nagar, Jaipur - 302033</p> <br>
+                <p><i class="fas fa-phone"></i> +91-8112289329, +91-7300210322</p> <br>
+                <p><i class="fas fa-envelope"></i> hospitalitysolution06@gmail.com</p> <br>
+                <div style="border-left: 3px solid var(--accent-gold); padding-left: 15px; margin-top: 20px;">
+                    <p><em>"We maintain our honesty towards our business."</em></p> </div>
+            </div>
+
+            <div class="contact-form-box">
+                <h3 style="margin-bottom: 1rem;">Send a Message / Upload Info</h3>
+                <form id="contactForm" onsubmit="event.preventDefault(); alert('Thank you! Your details (and image if attached) have been sent to our team.');">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" placeholder="Event Type (Wedding, Corporate, etc.)">
+                    
+                    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--accent-gold);">Upload Event Reference or Resume:</label>
+                    <input type="file" id="fileUpload" accept="image/*, .pdf">
+                    
+                    <textarea rows="4" placeholder="How can we help you?" required></textarea>
+                    
+                    <button type="submit" class="btn-gold" style="width: 100%;">Submit Inquiry</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Hospitality Solutions. All Rights Reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">Crafting Experiences, Managing Moments.</p>
+    </footer>
+
+</body>
+</html>
